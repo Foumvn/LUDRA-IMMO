@@ -1,0 +1,85 @@
+
+{
+  "hero": {
+    "title": "Trouvez Votre Logement Idéal",
+    "subtitle": "Des milliers d'annonces de chambres, appartements, studios et maisons vous attendent. Réservez en toute confiance.",
+    "search_placeholder": "Rechercher un logement...",
+    "location_placeholder": "Où ?",
+    "type_placeholder": "Type de logement",
+    "search_button": "Rechercher",
+    "stats": {
+      "listings": "Annonces actives",
+      "cities": "Villes couvertes",
+      "satisfaction": "Satisfaction clients",
+      "support": "Support disponible"
+    }
+  },
+  "filters": {
+    "labels": {
+      "location": "Localisation",
+      "type": "Type",
+      "price": "Budget",
+      "search": "Recherche"
+    },
+    "price_ranges": {
+      "0_500": "Moins de 500€",
+      "500_800": "500€ - 800€",
+      "800_1200": "800€ - 1200€",
+      "1200_2000": "1200€ - 2000€",
+      "2000_plus": "Plus de 2000€"
+    }
+  },
+  "property_types": {
+    "apartment": "Appartement",
+    "studio": "Studio",
+    "house": "Maison",
+    "room": "Chambre",
+    "loft": "Loft"
+  },
+  "locations": {
+    "paris": "Paris",
+    "lyon": "Lyon",
+    "marseille": "Marseille",
+    "bordeaux": "Bordeaux",
+    "toulouse": "Toulouse",
+    "lille": "Lille",
+    "nice": "Nice",
+    "nantes": "Nantes"
+  },
+  "property_titles": {
+    "modern_apartment": "Appartement Moderne en Centre-Ville",
+    "cozy_studio": "Studio Cosy Proche Métro",
+    "house_garden": "Maison avec Jardin",
+    "luxury_loft": "Loft de Luxe avec Vue"
+  },
+  "featured_section": {
+    "title": "Propriétés en Vedette",
+    "subtitle": "Découvrez nos meilleures annonces sélectionnées avec soin",
+    "featured_badge": "En Vedette",
+    "per_month": "/mois",
+    "view_details": "Voir les détails"
+  },
+  "property_details": {
+    "beds": "lit",
+    "beds_plural": "lits",
+    "baths": "salle de bain",
+    "baths_plural": "salles de bain",
+    "area": "m²"
+  },
+  "process": {
+    "title": "Comment ça marche",
+    "subtitle": "Trouvez et réservez votre logement en 3 étapes simples",
+    "search": "Recherchez",
+    "search_description": "Trouvez le logement parfait grâce à nos filtres avancés",
+    "book": "Réservez",
+    "book_description": "Planifiez votre séjour en quelques clics",
+    "move_in": "Emménagez",
+    "move_in_description": "Installez-vous et profitez de votre nouveau logement"
+  },
+  "cta": {
+    "title": "Prêt à trouver votre prochain logement ?",
+    "subtitle": "Rejoignez des milliers de personnes qui ont déjà trouvé leur bonheur sur HousePlateforme",
+    "primary_button": "Commencer la recherche",
+    "secondary_button": "En savoir plus"
+  }
+}

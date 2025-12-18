@@ -1,0 +1,528 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "add_favorite": "Ajouter aux favoris",
+    "remove_favorite": "Retirer des favoris",
+    "share": "Partager",
+    "cancel": "Annuler",
+    "back": "Retour",
+    "creating": "Création...",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "saving": "Enregistrement...",
+    "save_changes": "Enregistrer les modifications",
+    "save": "Sauvegarder",
+    "confirm": "Confirmer"
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion à votre compte",
+      "subtitle": "Accédez à votre espace personnel",
+      "emailOrPhone": "Email ou numéro de téléphone",
+      "password": "Mot de passe",
+      "showPassword": "Afficher le mot de passe",
+      "hidePassword": "Masquer le mot de passe",
+      "forgotPassword": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "loading": "Connexion en cours...",
+      "success": "Connexion réussie !",
+      "noAccount": "Pas encore de compte ?",
+      "signup": "S'inscrire"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "subtitle": "Rejoignez notre communauté",
+      "name": "Nom complet",
+      "email": "Adresse email",
+      "phone": "Numéro de téléphone",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "role": {
+        "label": "Type de compte",
+        "tenant": "Locataire",
+        "landlord": "Propriétaire"
+      },
+      "showPassword": "Afficher le mot de passe",
+      "hidePassword": "Masquer le mot de passe",
+      "submit": "Créer un compte",
+      "loading": "Création en cours...",
+      "success": "Compte créé avec succès !",
+      "hasAccount": "Vous avez déjà un compte ?",
+      "signin": "Se connecter"
+    },
+    "placeholder": {
+      "emailOrPhone": "email@exemple.com ou +33612345678",
+      "name": "Daniel dollar",
+      "email": "email@exemple.com",
+      "phone": "+33612345678",
+      "password": "********",
+      "confirmPassword": "********"
+    },
+    "validation": {
+      "name_required": "Le nom complet est requis",
+      "name_min": "Le nom doit contenir au moins 2 caractères",
+      "email_required": "L'email est requis",
+      "email_invalid": "Email invalide",
+      "phone_required": "Le numéro de téléphone est requis",
+      "phone_invalid": "Numéro de téléphone invalide",
+      "password_required": "Le mot de passe est requis",
+      "password_min": "Le mot de passe doit contenir au moins 8 caractères",
+      "confirmPassword_required": "La confirmation du mot de passe est requise",
+      "passwords_match": "Les mots de passe ne correspondent pas",
+      "emailOrPhone_required": "L'email ou le numéro de téléphone est requis",
+      "password_complexity": "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre",
+      "invalid_credentials": "Email/téléphone ou mot de passe incorrect"
+    }
+  },
+  "navigation": {
+    "home": "Accueil",
+    "properties": "Propriétés",
+    "favorites": "Favoris",
+    "about": "À propos",
+    "contact": "Contact",
+    "login": "Connexion",
+    "signup": "Inscription",
+    "dashboard": "Tableau de bord",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": "Déconnexion"
+  },
+  "hero": {
+    "title": "Trouvez Votre Logement Idéal",
+    "subtitle": "Découvrez les meilleures propriétés dans votre région. Des milliers d'annonces de chambres, appartements, studios et maisons vous attendent. Réservez en toute confiance.",
+    "search_button": "Rechercher",
+    "search_placeholder": "Rechercher une propriété",
+    "all_locations": "Localisations",
+    "all_types": "Tous les types",
+    "stats": {
+      "listings": "Annonces actives",
+      "cities": "Villes couvertes",
+      "satisfaction": "Satisfaction clients",
+      "support": "Support disponible"
+    }
+  },
+  "property_types": {
+    "apartment": "Appartement",
+    "studio": "Studio",
+    "house": "Maison",
+    "room": "Chambre",
+    "all": "Logements"
+  },
+  "locations": {
+    "douala": "Douala, Cameroun",
+    "yaounde": "Yaoundé, Cameroun",
+    "bafoussam": "Bafoussam, Cameroun",
+    "garoua": "Garoua, Cameroun",
+    "ngaoundere": "Ngaoundéré, Cameroun",
+    "limbe": "Limbe, Cameroun",
+    "kribi": "Kribi, Cameroun",
+    "bamenda": "Bamenda, Cameroun"
+  },
+  "property_titles": {
+    "modern_apartment": "Appartement de Standing",
+    "cozy_studio": "Studio Moderne et Agréable",
+    "house_garden": "Superbe Villa avec Jardin",
+    "luxury_loft": "Loft de Luxe avec Vue",
+    "downtown_flat": "Appartement Lumineux Centre-Ville",
+    "quiet_studio": "Studio Calme Proche Parc",
+    "standing_apartment": "Appartement de Grand Standing",
+    "chambre_moderne": "Chambre Meublée Moderne",
+    "belle_villa": "Belle Villa Familiale",
+    "duplex_haut_standing": "Duplex Haut Standing",
+    "studio_meuble": "Studio Meublé Confortable",
+    "maison_balcon": "Maison avec Balcon"
+  },
+  "process": {
+    "title": "Comment",
+    "highlighted_title": "ça marche",
+    "subtitle": "Trouvez et réservez votre logement en 3 étapes simples",
+    "search": "Recherchez",
+    "search_description": "Trouvez le logement parfait grâce à nos filtres avancés",
+    "book": "Réservez",
+    "book_description": "Planifiez votre séjour en quelques clics",
+    "move_in": "Emménagez",
+    "move_in_description": "Installez-vous et profitez de votre nouveau logement"
+  },
+  "cta": {
+    "title": "Prêt à trouver votre prochain logement ?",
+    "subtitle": "Rejoignez des milliers de personnes qui ont déjà trouvé leur bonheur sur HousePlateforme",
+    "primary_button": "Commencer la recherche",
+    "secondary_button": "En savoir plus"
+  },
+  "property_details": {
+    "view_details": "Voir détails",
+    "not_found": "Propriété non trouvée",
+    "back_to_properties": "Retour",
+    "contact_owner": "Contacter le propriétaire",
+    "not_found_description": "La propriété que vous recherchez n'existe pas ou a été supprimée.",
+    "no_description": "Aucune description disponible pour cette propriété.",
+    "schedule_visit": "Planifier une visite",
+    "description": "Description",
+    "address": "Adresse",
+    "location": "Localisation",
+    "map_placeholder": "Carte non disponible",
+    "beds": "chambre",
+    "beds_plural": "chambres",
+    "baths": "salle de bain",
+    "baths_plural": "salles de bain",
+    "area": "m²"
+  },
+  "properties_page": {
+    "title": "Toutes les propriétés",
+    "subtitle": "Découvrez notre sélection de logements exceptionnels",
+    "search_placeholder": "Rechercher une propriété...",
+    "filters": "Filtres",
+    "reset_filters": "Réinitialiser",
+    "apply_filters": "Appliquer",
+    "results_count": "{{count}} propriété(s) trouvée(s)",
+    "no_results": "Aucune propriété trouvée",
+    "no_results_description": "Essayez de modifier vos critères de recherche"
+  },
+  "property_descriptions": {
+    "modern_apartment": "Cet appartement moderne situé en plein cœur de Douala offre un cadre de vie exceptionnel avec des finitions haut de gamme. Idéal pour les professionnels cherchant confort et standing.",
+    "cozy_studio": "Studio cosy et fonctionnel parfait pour une personne. Situé dans un quartier calme, il offre tout le nécessaire pour un séjour agréable dans la capitale.",
+    "house_garden": "Magnifique villa familiale avec jardin spacieux. Parfaite pour les familles cherchant espace et tranquillité dans un environnement sécurisé.",
+    "luxury_loft": "Loft de luxe avec vue imprenable. Design contemporain et équipements haut de gamme pour une expérience de vie unique.",
+    "downtown_flat": "Appartement fonctionnel en centre-ville, proche de tous les services et commodités. Parfait pour les étudiants ou jeunes actifs.",
+    "quiet_studio": "Studio calme et lumineux proche des espaces verts. Idéal pour les personnes cherchant tranquillité et confort.",
+    "standing_apartment": "Appartement de grand standing avec équipements premium. Conçu pour offrir le meilleur du confort moderne.",
+    "chambre_moderne": "Chambre meublée moderne dans une colocation conviviale. Parfait pour les étudiants ou jeunes professionnels."
+  },
+  "featured_section": {
+    "title": "Propriétés",
+    "highlighted_title": "en Vedette",
+    "subtitle": "Découvrez nos meilleures annonces sélectionnées avec soin",
+    "featured_badge": "En Vedette",
+    "per_month": " /mois",
+    "view_details": "Voir les détails",
+    "beds": "chambre",
+    "beds_plural": "chambres",
+    "baths": "salle de bain",
+    "baths_plural": "salles de bain",
+    "area": "m²"
+  },
+  "admin_properties": {
+    "title": "Gestion des propriétés",
+    "subtitle": "Gérez toutes les propriétés de la plateforme",
+    "search_placeholder": "Rechercher une propriété...",
+    "all_landlords": "Tous les propriétaires",
+    "results_count": "{{count}} propriété(s) trouvée(s)",
+    "no_properties": "Aucune propriété trouvée",
+    "no_properties_description": "Aucune propriété ne correspond à vos critères de recherche.",
+    "stats": {
+      "total": "Total",
+      "available": "Disponibles",
+      "occupied": "Occupées",
+      "pending": "En attente"
+    },
+    "add_property": "Ajouter une propriété"
+  },
+  "filters": {
+    "labels": {
+      "all_locations": "Toutes les localisations",
+      "all_types": "Tous les types",
+      "all_prices": "Tous les prix",
+      "any_beds": "Toutes chambres",
+      "any_baths": "Toutes salles de bain",
+      "beds": "Chambres",
+      "baths": "Salles de bain",
+      "location": "Localisation",
+      "type": "Type de logement",
+      "price": "Budget",
+      "search": "Recherche",
+      "status": "Statut",
+      "all_status": "Tous les statuts"
+    },
+    "price_ranges": {
+      "0_500": "Moins de 100 000 FCFA",
+      "500_800": "100 000 - 300 000 FCFA",
+      "800_1200": "300 000 - 600 000 FCFA",
+      "1200_2000": "600 000 - 1 000 000 FCFA",
+      "2000_plus": "Plus de 1 000 000 FCFA"
+    },
+    "beds": {
+      "1": "1 chambre",
+      "2": "2 chambres",
+      "3": "3 chambres",
+      "4": "4 chambres",
+      "5_plus": "5+ chambres"
+    },
+    "baths": {
+      "1": "1 salle de bain",
+      "2": "2 salles de bain",
+      "3": "3 salles de bain",
+      "4_plus": "4+ salles de bain"
+    }
+  },
+  "favorites": {
+    "title": "Mes Favoris",
+    "subtitle": "Vos propriétés préférées",
+    "back_to_properties": "Retour aux propriétés",
+    "no_favorites": "Aucun favori",
+    "no_favorites_description": "Vous n'avez pas encore ajouté de propriétés à vos favoris. Parcourez nos propriétés et ajoutez celles qui vous intéressent !",
+    "explore_properties": "Explorer les propriétés"
+  },
+  "profile_user": {
+    "contact_info": "Informations de contact",
+    "account_info": "Informations du compte",
+    "quick_actions": "Actions rapides",
+    "email_verified": "Email vérifié",
+    "phone_verified": "Téléphone vérifié",
+    "email": "Email",
+    "phone": "Téléphone",
+    "city": "Ville",
+    "member_since": "Membre depuis",
+    "last_updated": "Dernière mise à jour",
+    "role": "Rôle",
+    "status": "Statut",
+    "active": "Actif",
+    "add_property": "Ajouter une propriété",
+    "my_properties": "Mes propriétés",
+    "add_users": "Ajouter un utilisateur",
+    "manage_properties": "Gérer les propriétés",
+    "not_connected": "Non connecté",
+    "please_login": "Veuillez vous connecter pour voir votre profil",
+    "user_not_found": "Utilisateur non trouvé",
+    "user_not_found_description": "Votre compte n'a pas été trouvé dans notre système"
+  },
+  "add_property": {
+    "title": "Ajouter une propriété",
+    "subtitle": "Remplissez les informations de votre propriété",
+    "page_title": "Nouvelle propriété",
+    "page_subtitle": "Ajoutez une nouvelle propriété",
+    "success_title": "Propriété créée !",
+    "success_message": "Votre propriété a été ajoutée avec succès.",
+    "view_properties": "Voir mes propriétés",
+    "upload_description": "Glissez-déposez vos images ici ou cliquez pour parcourir",
+    "upload_button": "Choisir des images",
+    "submit_button": "Créer la propriété",
+    "images_preview": "Images sélectionnées",
+    "labels": {
+      "title": "Titre de la propriété",
+      "type": "Type de propriété",
+      "location": "Localisation",
+      "price": "Prix mensuel",
+      "beds": "Chambres",
+      "baths": "Salles de bain",
+      "area": "Superficie",
+      "address": "Adresse complète",
+      "description": "Description",
+      "images": "Images",
+      "amenities": "Équipements",
+      "featured": "Mettre en vedette"
+    },
+    "placeholders": {
+      "title": "Ex: Bel appartement moderne au cœur de Douala",
+      "select_location": "Sélectionnez une ville",
+      "address": "Ex: Akwa, Douala",
+      "description": "Décrivez votre propriété en détail..."
+    }
+  },
+  "my_properties": {
+    "title": "Mes Propriétés",
+    "subtitle": "Gérez toutes vos propriétés au même endroit",
+    "search_placeholder": "Rechercher une propriété...",
+    "filters": "Filtres",
+    "reset_filters": "Réinitialiser",
+    "apply_filters": "Appliquer les filtres",
+    "results_count": "{{count}} propriété(s) trouvée(s)",
+    "no_properties": "Aucune propriété trouvée",
+    "no_properties_description": "Vous n'avez pas encore de propriétés. Ajoutez votre première propriété pour commencer.",
+    "add_property": "Ajouter une propriété",
+    "add_first_property": "Ajouter ma première propriété",
+    "edit_property": "Modifier la propriété",
+    "delete_property": "Supprimer la propriété",
+    "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette propriété ? Cette action est irréversible.",
+    "stats": {
+      "total": "Total",
+      "available": "Disponibles",
+      "occupied": "Occupées",
+      "pending": "En cours"
+    }
+  },
+  "property_status": {
+    "available": "Libre",
+    "occupied": "Occupé",
+    "pending": "En cours"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue",
+    "subtitle": "Tableau de bord propriétaire - Vue d'ensemble de votre activité",
+    "overview": "Vue d'ensemble",
+    "overview_subtitle": "Statistiques et performances de vos propriétés",
+    "view_properties": "Voir mes propriétés",
+    "add_property": "Ajouter une propriété",
+    "recent_properties": "Propriétés récentes",
+    "view_all_properties": "Voir toutes les propriétés",
+    "no_properties_yet": "Aucune propriété pour le moment",
+    "add_first_property_description": "Commencez par ajouter votre première propriété à gérer",
+    "add_first_property": "Ajouter ma première propriété",
+    "stats": {
+      "total_properties": "Total propriétés",
+      "properties_managed": "Propriétés gérées",
+      "monthly_revenue": "Revenu mensuel",
+      "from_occupied": "Provenant des propriétés occupées",
+      "average_price": "Prix moyen",
+      "per_month": "Par mois",
+      "occupancy_rate": "Taux d'occupation",
+      "occupied_properties": "propriétés occupées"
+    },
+    "charts": {
+      "status_distribution": "Répartition par statut",
+      "type_distribution": "Répartition par type",
+      "location_distribution": "Répartition par localisation",
+      "performance_metrics": "Indicateurs de performance"
+    },
+    "metrics": {
+      "availability_rate": "Taux de disponibilité",
+      "occupancy_rate": "Taux d'occupation",
+      "pending_rate": "Taux en attente"
+    }
+  },
+  "login_modal": {
+    "login": "Se connecter",
+    "contact_title": "Connexion requise",
+    "contact_description": "Veuillez vous connecter pour contacter le propriétaire",
+    "favorite_title": "Connexion requise",
+    "favorite_description": "Veuillez vous connecter pour ajouter aux favoris",
+    "schedule_title": "Connexion requise",
+    "schedule_description": "Veuillez vous connecter pour planifier une visite",
+    "general_title": "Connexion requise",
+    "general_description": "Veuillez vous connecter pour effectuer cette action",
+    "benefits": "En vous connectant, vous pourrez sauvegarder vos favoris, contacter des propriétaires et gérer vos recherches"
+  },
+  "admin_dashboard": {
+    "welcome": "Bienvenue Administrateur",
+    "subtitle": "Tableau de bord d'administration - Gestion complète de la plateforme",
+    "overview": "Vue d'ensemble",
+    "overview_subtitle": "Statistiques et performances globales de la plateforme",
+    "view_properties": "Gérer les propriétés",
+    "view_users": "Gérer les utilisateurs",
+    "recent_properties": "Propriétés récentes",
+    "view_all_properties": "Voir toutes les propriétés",
+    "no_properties_yet": "Aucune propriété sur la plateforme",
+    "no_properties_description": "Aucune propriété n'a été ajoutée pour le moment",
+    "owner": "Propriétaire",
+    "stats": {
+      "total_properties": "Total propriétés",
+      "properties_platform": "Propriétés sur la plateforme",
+      "total_users": "Total utilisateurs",
+      "landlords": "propriétaires",
+      "monthly_revenue": "Revenu mensuel",
+      "platform_revenue": "Revenu total plateforme",
+      "occupancy_rate": "Taux d'occupation",
+      "occupied_properties": "propriétés occupées",
+      "regular_users": "Utilisateurs réguliers",
+      "admins": "Administrateurs"
+    },
+    "charts": {
+      "status_distribution": "Répartition par statut",
+      "type_distribution": "Répartition par type",
+      "location_distribution": "Répartition par localisation",
+      "user_distribution": "Répartition des utilisateurs"
+    }
+  },
+  "admin_add_property": {
+    "page_title": "Ajouter une propriété (Admin)",
+    "page_subtitle": "Ajoutez une nouvelle propriété à la plateforme",
+    "success_title": "Propriété ajoutée avec succès",
+    "success_message": "La propriété a été ajoutée à la plateforme avec succès.",
+    "view_properties": "Voir les propriétés"
+  },
+    "admin_users": {
+    "title": "Gestion des utilisateurs",
+    "subtitle": "Administrez tous les utilisateurs de la plateforme",
+    "search_placeholder": "Rechercher un utilisateur...",
+    "results_count": "{{count}} utilisateur(s) trouvé(s)",
+    "no_users": "Aucun utilisateur trouvé",
+    "no_users_description": "Aucun utilisateur ne correspond à vos critères de recherche.",
+    "back_dashboard": "Retour au dashboard",
+    "add_user": "Ajouter un utilisateur",
+    "reset_filters": "Réinitialiser",
+    "apply_filters": "Appliquer",
+    "filters": {
+      "title": "Filtres",
+      "role": "Rôle",
+      "verification": "Vérification",
+      "all_roles": "Tous les rôles",
+      "all_users": "Tous les utilisateurs",
+      "email_verified": "Email vérifié",
+      "phone_verified": "Téléphone vérifié"
+    },
+    "roles": {
+      "admin": "Administrateur",
+      "landlord": "Propriétaire",
+      "user": "Utilisateur"
+    },
+    "change_role": "Changer le rôle",
+    "stats": {
+      "total": "Total",
+      "admins": "Admins",
+      "landlords": "Propriétaires",
+      "users": "Utilisateurs",
+      "email_verified": "Email vérifié",
+      "phone_verified": "Tél. vérifié"
+    },
+    "add_user_subtitle": "Ajouter un nouvel utilisateur au système",
+    "add_user_button": "Créer l'utilisateur",
+    "edit_user": "Modifier l'utilisateur",
+    "upload_avatar": "Choisir une photo",
+    "change_avatar": "Changer la photo",
+    "labels": {
+      "name": "Nom complet",
+      "email": "Adresse email",
+      "phone": "Numéro de téléphone",
+      "role": "Rôle",
+      "city": "Ville",
+      "dateOfBirth": "Date de naissance",
+      "emailVerified": "Email vérifié",
+      "phoneVerified": "Téléphone vérifié",
+      "isActive": "Compte actif"
+    },
+    "placeholders": {
+      "name": "John Daniel",
+      "email": "john@example.com",
+      "phone": "+237 6XX XX XX XX",
+      "city": "Yaoundé, Douala, Bafoussam..."
+    },
+    "user_details": "Détails de l'utilisateur",
+    "delete_user": "Supprimer l'utilisateur",
+    "delete_confirmation": "Êtes-vous sûr de vouloir supprimer l'utilisateur \"{{name}}\" ? Cette action est irréversible.",
+    "delete_confirmation_generic": "Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est irréversible.",
+    "add_first_user": "Ajouter le premier utilisateur",
+    "confirm_delete": "Confirmer la suppression",
+    "delete_confirmation_message": "Cette action est irréversible. Voulez-vous vraiment continuer ?",
+    "deleting": "Suppression...",
+    
+    "contact_info": "Informations de contact",
+    "location_info": "Localisation",
+    "account_info": "Informations du compte",
+    "member_since": "Membre depuis",
+    "last_update": "Dernière mise à jour",
+    "account_status": "Statut du compte",
+    "user_id": "ID Utilisateur",
+    "no_city": "Aucune ville renseignée",
+    "verified": "Vérifié",
+    "not_verified": "Non vérifié",
+    "status": {
+      "active": "Actif",
+      "inactive": "Inactif"
+    }
+  },
+  "admin_add_user": {
+    "page_title": "Ajouter un utilisateur",
+    "page_subtitle": "Créez un nouveau compte utilisateur dans le système",
+    "success_title": "Utilisateur créé avec succès",
+    "success_message": "L'utilisateur a été ajouté au système avec succès.",
+    "view_users": "Voir tous les utilisateurs"
+  },
+  "pagination": {
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page_of": "Page {{current}} sur {{total}}",
+    "showing": "Affichage de",
+    "to": "à",
+    "of": "sur",
+    "results": "résultats"
+  }
+}

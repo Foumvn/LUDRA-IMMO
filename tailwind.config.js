@@ -1,0 +1,86 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      animation: {
+        'fade-in-up': 'fadeInUp 0.8s ease-out',
+        'slide-in-left': 'slideInLeft 0.8s ease-out',
+        'slide-in-right': 'slideInRight 0.8s ease-out',
+        'float': 'float 3s ease-in-out infinite',
+        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        'bounce': 'bounce 1s infinite',
+      },
+      colors: {
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: '#103778',
+          foreground: '#FFFFFF',
+          '50': '#E6ECF6',
+          '100': '#CCD9ED',
+          '200': '#99B3DB',
+          '300': '#668DC9',
+          '400': '#3367B7',
+          '500': '#103778',
+          '600': '#0D2C60',
+          '700': '#0A2148',
+          '800': '#071630',
+          '900': '#040B18',
+        },
+        secondary: {
+          DEFAULT: '#FF5A33',
+          foreground: '#FFFFFF',
+          '50': '#FFECE6',
+          '100': '#FFD9CC',
+          '200': '#FFB399',
+          '300': '#FF8C66',
+          '400': '#FF6633',
+          '500': '#FF5A33',
+          '600': '#E5411A',
+          '700': '#B33315',
+          '800': '#802410',
+          '900': '#4D160A',
+          '950': '#330E06'
+        },
+        tertiary: {
+          DEFAULT: '#FFFFFF',
+          foreground: '#103778',
+          '50': '#FFFFFF',
+          '100': '#F2F2F2',
+          '200': '#E6E6E6',
+          '300': '#D9D9D9',
+          '400': '#CCCCCC',
+          '500': '#FFFFFF',
+          '600': '#F0F0F0',
+          '700': '#E0E0E0',
+          '800': '#D0D0D0',
+          '900': '#C0C0C0',
+        },
+        accent: {
+          DEFAULT: '#FF5A33',
+          foreground: '#FFFFFF',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        border: 'hsl(var(--border))',
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+    },
+  },
+  plugins: [],
+}
