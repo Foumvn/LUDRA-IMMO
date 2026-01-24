@@ -1,0 +1,289 @@
+openapi: 3.0.0
+info:
+  title: API Immobilier
+  description: |
+    API REST pour la gestion d'une plateforme immobilière.
+    
+    Cette API permet de gérer:
+    - L'authentification des utilisateurs (inscription, connexion)
+    - Les propriétés immobilières (CRUD complet)
+    - Les favoris des utilisateurs
+    - Les tableaux de bord pour les propriétaires
+    - La gestion des utilisateurs
+    
+    ## Authentification
+    
+    La plupart des endpoints nécessitent une authentification via JWT.
+    Pour obtenir un token, utilisez l'endpoint `/api/auth/login` ou `/api/auth/register`.
+    
+    Ensuite, incluez le token dans l'en-tête `Authorization`:
+    ```
+    Authorization: Bearer <votre_token>
+    ```
+    
+    ## Rôles
+    
+    - **user**: Utilisateur standard
+    - **owner**: Propriétaire de biens immobiliers
+    - **admin**: Administrateur avec tous les droits
+    
+  version: 1.0.0
+  contact:
+    name: Support API
+    email: support@immo.com
+
+servers:
+  - url: http://localhost:5000/api
+    description: Serveur de développement
+  - url: https://api.immo.com/api
+    description: Serveur de production
+
+tags:
+  - name: Auth
+    description: Authentification et gestion des utilisateurs
+  - name: Properties
+    description: Gestion des propriétés immobilières
+  - name: Users
+    description: Gestion des utilisateurs
+  - name: Favorites
+    description: Gestion des favoris
+  - name: Dashboard
+    description: Tableaux de bord
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT token obtenu via /api/auth/login ou /api/auth/register.
+        Format: Bearer <token>
+  
+  schemas:
+    User:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Identifiant unique de l'utilisateur
+        name:
+          type: string
+          description: Nom de l'utilisateur
+        email:
+          type: string
+          format: email
+          description: Email de l'utilisateur
+        phone:
+          type: string
+          description: Numéro de téléphone
+        city:
+          type: string
+          description: Ville de l'utilisateur
+        role:
+          type: string
+          enum: [user, owner, admin]
+          description: Rôle de l'utilisateur
+        emailVerified:
+          type: boolean
+          description: Email vérifié
+        phoneVerified:
+          type: boolean
+          description: Téléphone vérifié
+        avatar:
+          type: string
+          nullable: true
+          description: URL de l'avatar
+        favorites:
+          type: array
+          items:
+            type: string
+          description: Liste des IDs de propriétés favorites
+        status:
+          type: string
+          enum: [active, inactive, banned]
+          description: Statut du compte
+        preferences:
+          type: object
+          properties:
+            notifications:
+              type: boolean
+            newsletter:
+              type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    
+    Property:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifiant unique de la propriété
+        ownerId:
+          type: string
+          description: ID du propriétaire
+        title:
+          type: string
+          description: Titre de la propriété
+        description:
+          type: string
+          description: Description détaillée
+        type:
+          type: string
+          enum: [house, apartment, villa, studio, office, land]
+          description: Type de propriété
+        price:
+          type: number
+          format: float
+          description: Prix en euros
+        rooms:
+          type: integer
+          description: Nombre de pièces
+        bathrooms:
+          type: integer
+          description: Nombre de salles de bain
+        surface:
+          type: number
+          format: float
+          description: Surface en m²
+        region:
+          type: string
+          description: Région
+        city:
+          type: string
+          description: Ville
+        address:
+          type: string
+          description: Adresse complète
+        coordinates:
+          type: object
+          properties:
+            lat:
+              type: number
+            lng:
+              type: number
+        status:
+          type: string
+          enum: [available, sold, rented, unavailable]
+          description: Statut de la propriété
+        images:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: URLs des images
+        features:
+          type: array
+          items:
+            type: string
+          description: Caractéristiques (piscine, parking, etc.)
+        isFeatured:
+          type: boolean
+          description: Propriété mise en avant
+        isPremium:
+          type: boolean
+          description: Propriété premium
+        visits:
+          type: integer
+          description: Nombre de visites
+        contactRequests:
+          type: integer
+          description: Nombre de demandes de contact
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    
+    Favorite:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        propertyId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Message d'erreur
+        status:
+          type: integer
+          description: Code de statut HTTP
+    
+    Success:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          description: Données de la réponse
+        message:
+          type: string
+          description: Message de succès
+    
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+    
+    RegisterRequest:
+      type: object
+      required:
+        - email
+        - password
+        - name
+        - phone
+        - city
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+          minLength: 6
+        name:
+          type: string
+        phone:
+          type: string
+        city:
+          type: string
+        role:
+          type: string
+          enum: [user, owner, admin]
+          default: user
+    
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        token:
+          type: string
+          description: JWT token
+
+security:
+  - bearerAuth: []
+
