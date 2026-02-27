@@ -33,7 +33,6 @@ instance/
 
 # Firebase
 firebase-credentials.json
-*-firebase-adminsdk-*.json
 
 # IDE
 .vscode/
