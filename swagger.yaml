@@ -52,7 +52,7 @@ tags:
 
 components:
   securitySchemes:
-    bearerAuth:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: JWT
@@ -285,5 +285,5 @@ components:
           description: JWT token
 
 security:
-  - bearerAuth: []
+  - Bearer: []
 
