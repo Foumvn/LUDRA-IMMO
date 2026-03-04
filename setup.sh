@@ -22,7 +22,7 @@ source venv/bin/activate
 # Installer les dépendances
 echo "📥 Installation des dépendances..."
 pip install --upgrade pip
-pip install -r requirement_dollar.txt
+pip install -r requirements.txt
 
 echo ""
 echo "✅ Installation terminée !"

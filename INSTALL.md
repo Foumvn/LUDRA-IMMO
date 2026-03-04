@@ -22,7 +22,7 @@ python3 -m venv venv
 source venv/bin/activate
 
 # Installer les dépendances
-pip install -r requirement_dollar.txt
+pip install -r requirements.txt
 
 # Lancer l'application
 python3 app.py

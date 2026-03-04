@@ -33,6 +33,7 @@ instance/
 
 # Firebase
 firebase-credentials.json
+*-firebase-adminsdk-*.json
 
 # IDE
 .vscode/
@@ -48,5 +49,3 @@ Thumbs.db
 # Logs
 *.log
 
-firebase-adminsdk.json
-.env

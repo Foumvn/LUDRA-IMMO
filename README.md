@@ -8,7 +8,7 @@ API REST pour la gestion immobilière avec Flask et Firebase (Firestore + Storag
 Immo/
 ├── app.py                 # Point d'entrée de l'application
 ├── config.py              # Configuration de l'application
-├── requirement_dollar.txt       # Dépendances Python
+├── requirements.txt       # Dépendances Python
 ├── models/                # Modèles de données
 │   ├── user.py
 │   ├── property.py
@@ -37,7 +37,7 @@ Immo/
 
 1. Installer les dépendances:
 ```bash
-pip install -r requirement_dollar.txt
+pip install -r requirements.txt
 ```
 
 2. Configurer les variables d'environnement:
