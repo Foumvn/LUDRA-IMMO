@@ -1,4 +1,4 @@
-openapi: 3.0.0
+swagger: "2.0"
 info:
   title: API Immobilier
   description: |
@@ -32,11 +32,11 @@ info:
     name: Support API
     email: support@immo.com
 
-servers:
-  - url: http://localhost:5000/api
-    description: Serveur de développement
-  - url: https://api.immo.com/api
-    description: Serveur de production
+host: localhost:5000
+basePath: /api
+schemes:
+  - http
+  - https
 
 tags:
   - name: Auth
@@ -50,18 +50,17 @@ tags:
   - name: Dashboard
     description: Tableaux de bord
 
-components:
-  securitySchemes:
-    Bearer:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: |
-        JWT token obtenu via /api/auth/login ou /api/auth/register.
-        Format: Bearer <token>
-  
-  schemas:
-    User:
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: |
+      JWT token obtenu via /api/auth/login ou /api/auth/register.
+      Format: Bearer <token>
+
+definitions:
+  User:
       type: object
       properties:
         uid:
@@ -117,7 +116,7 @@ components:
           type: string
           format: date-time
     
-    Property:
+  Property:
       type: object
       properties:
         id:
@@ -200,7 +199,7 @@ components:
           type: string
           format: date-time
     
-    Favorite:
+  Favorite:
       type: object
       properties:
         id:
@@ -213,7 +212,7 @@ components:
           type: string
           format: date-time
     
-    Error:
+  Error:
       type: object
       properties:
         error:
@@ -223,7 +222,7 @@ components:
           type: integer
           description: Code de statut HTTP
     
-    Success:
+  Success:
       type: object
       properties:
         success:
@@ -235,7 +234,7 @@ components:
           type: string
           description: Message de succès
     
-    LoginRequest:
+  LoginRequest:
       type: object
       required:
         - email
@@ -248,7 +247,7 @@ components:
           type: string
           format: password
     
-    RegisterRequest:
+  RegisterRequest:
       type: object
       required:
         - email
@@ -275,11 +274,11 @@ components:
           enum: [user, owner, admin]
           default: user
     
-    AuthResponse:
+  AuthResponse:
       type: object
       properties:
         user:
-          $ref: '#/components/schemas/User'
+          $ref: '#/definitions/User'
         token:
           type: string
           description: JWT token
