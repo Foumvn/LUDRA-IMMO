@@ -15,42 +15,42 @@ def register():
       - Auth
     summary: Créer un nouveau compte utilisateur
     description: Permet de créer un nouveau compte utilisateur. Retourne un token JWT pour l'authentification.
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - email
-              - password
-              - name
-              - phone
-              - city
-            properties:
-              email:
-                type: string
-                format: email
-                example: user@example.com
-              password:
-                type: string
-                format: password
-                minLength: 6
-                example: password123
-              name:
-                type: string
-                example: John Doe
-              phone:
-                type: string
-                example: +33123456789
-              city:
-                type: string
-                example: Paris
-              role:
-                type: string
-                enum: [user, owner, admin]
-                default: user
-                example: user
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          required:
+            - email
+            - password
+            - name
+            - phone
+            - city
+          properties:
+            email:
+              type: string
+              format: email
+              example: user@example.com
+            password:
+              type: string
+              format: password
+              minLength: 6
+              example: password123
+            name:
+              type: string
+              example: John Doe
+            phone:
+              type: string
+              example: +33123456789
+            city:
+              type: string
+              example: Paris
+            role:
+              type: string
+              enum: [user, owner, admin]
+              default: user
+              example: user
     responses:
       201:
         description: Utilisateur créé avec succès
@@ -134,24 +134,24 @@ def login():
       - Auth
     summary: Authentification utilisateur
     description: Permet de se connecter avec un email et un mot de passe. Retourne un token JWT.
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - email
-              - password
-            properties:
-              email:
-                type: string
-                format: email
-                example: user@example.com
-              password:
-                type: string
-                format: password
-                example: password123
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              type: string
+              format: email
+              example: user@example.com
+            password:
+              type: string
+              format: password
+              example: password123
     responses:
       200:
         description: Connexion réussie
@@ -253,25 +253,25 @@ def change_password(current_user: User):
     description: Permet à l'utilisateur connecté de changer son mot de passe.
     security:
       - Bearer: []
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - oldPassword
-              - newPassword
-            properties:
-              oldPassword:
-                type: string
-                format: password
-                example: oldpassword123
-              newPassword:
-                type: string
-                format: password
-                minLength: 6
-                example: newpassword123
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          required:
+            - oldPassword
+            - newPassword
+          properties:
+            oldPassword:
+              type: string
+              format: password
+              example: oldpassword123
+            newPassword:
+              type: string
+              format: password
+              minLength: 6
+              example: newpassword123
     responses:
       200:
         description: Mot de passe modifié avec succès
@@ -332,18 +332,18 @@ def verify_token():
       - Auth
     summary: Valider un token JWT
     description: Vérifie si un token JWT est valide et retourne son payload.
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - token
-            properties:
-              token:
-                type: string
-                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          required:
+            - token
+          properties:
+            token:
+              type: string
+              example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     responses:
       200:
         description: Résultat de la vérification

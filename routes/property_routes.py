@@ -22,113 +22,84 @@ def create_property(current_user: User):
       Accepte les données en JSON ou en form-data (pour l'upload d'images).
     security:
       - Bearer: []
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - title
-              - description
-              - type
-              - price
-              - rooms
-              - bathrooms
-              - surface
-              - region
-              - city
-              - address
-            properties:
-              title:
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          required:
+            - title
+            - description
+            - type
+            - price
+            - rooms
+            - bathrooms
+            - surface
+            - region
+            - city
+            - address
+          properties:
+            title:
+              type: string
+              example: Belle maison avec jardin
+            description:
+              type: string
+              example: Magnifique maison de 150m² avec jardin
+            type:
+              type: string
+              enum: [house, apartment, villa, studio, office, land]
+              example: house
+            price:
+              type: number
+              format: float
+              example: 350000
+            rooms:
+              type: integer
+              example: 4
+            bathrooms:
+              type: integer
+              example: 2
+            surface:
+              type: number
+              format: float
+              example: 150.5
+            region:
+              type: string
+              example: Île-de-France
+            city:
+              type: string
+              example: Paris
+            address:
+              type: string
+              example: 123 Rue de la Paix, 75001 Paris
+            coordinates:
+              type: object
+              properties:
+                lat:
+                  type: number
+                  example: 48.8566
+                lng:
+                  type: number
+                  example: 2.3522
+            status:
+              type: string
+              enum: [available, sold, rented, unavailable]
+              default: available
+            features:
+              type: array
+              items:
                 type: string
-                example: Belle maison avec jardin
-              description:
-                type: string
-                example: Magnifique maison de 150m² avec jardin
-              type:
-                type: string
-                enum: [house, apartment, villa, studio, office, land]
-                example: house
-              price:
-                type: number
-                format: float
-                example: 350000
-              rooms:
-                type: integer
-                example: 4
-              bathrooms:
-                type: integer
-                example: 2
-              surface:
-                type: number
-                format: float
-                example: 150.5
-              region:
-                type: string
-                example: Île-de-France
-              city:
-                type: string
-                example: Paris
-              address:
-                type: string
-                example: 123 Rue de la Paix, 75001 Paris
-              coordinates:
-                type: object
-                properties:
-                  lat:
-                    type: number
-                    example: 48.8566
-                  lng:
-                    type: number
-                    example: 2.3522
-              status:
-                type: string
-                enum: [available, sold, rented, unavailable]
-                default: available
-              features:
-                type: array
-                items:
-                  type: string
-                example: [piscine, parking, jardin]
-              isFeatured:
-                type: boolean
-                default: false
-              isPremium:
-                type: boolean
-                default: false
-              ownerId:
-                type: string
-                description: ID du propriétaire (optionnel, utilise l'utilisateur connecté par défaut)
-        multipart/form-data:
-          schema:
-            type: object
-            properties:
-              title:
-                type: string
-              description:
-                type: string
-              type:
-                type: string
-              price:
-                type: string
-              rooms:
-                type: string
-              bathrooms:
-                type: string
-              surface:
-                type: string
-              region:
-                type: string
-              city:
-                type: string
-              address:
-                type: string
-              images:
-                type: array
-                items:
-                  type: string
-                  format: binary
+              example: [piscine, parking, jardin]
+            isFeatured:
+              type: boolean
+              default: false
+            isPremium:
+              type: boolean
+              default: false
+            ownerId:
+              type: string
+              description: ID du propriétaire (optionnel, utilise l'utilisateur connecté par défaut)
     responses:
       201:
         description: Propriété créée avec succès
@@ -433,58 +404,46 @@ def update_property(current_user: User, property_id):
         schema:
           type: string
         description: ID de la propriété
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              title:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            title:
+              type: string
+            description:
+              type: string
+            type:
+              type: string
+              enum: [house, apartment, villa, studio, office, land]
+            price:
+              type: number
+              format: float
+            rooms:
+              type: integer
+            bathrooms:
+              type: integer
+            surface:
+              type: number
+              format: float
+            region:
+              type: string
+            city:
+              type: string
+            address:
+              type: string
+            status:
+              type: string
+              enum: [available, sold, rented, unavailable]
+            features:
+              type: array
+              items:
                 type: string
-              description:
-                type: string
-              type:
-                type: string
-                enum: [house, apartment, villa, studio, office, land]
-              price:
-                type: number
-                format: float
-              rooms:
-                type: integer
-              bathrooms:
-                type: integer
-              surface:
-                type: number
-                format: float
-              region:
-                type: string
-              city:
-                type: string
-              address:
-                type: string
-              status:
-                type: string
-                enum: [available, sold, rented, unavailable]
-              features:
-                type: array
-                items:
-                  type: string
-              isFeatured:
-                type: boolean
-              isPremium:
-                type: boolean
-        multipart/form-data:
-          schema:
-            type: object
-            properties:
-              title:
-                type: string
-              images:
-                type: array
-                items:
-                  type: string
-                  format: binary
+            isFeatured:
+              type: boolean
+            isPremium:
+              type: boolean
     responses:
       200:
         description: Propriété mise à jour avec succès
