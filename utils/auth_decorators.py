@@ -2,52 +2,39 @@ from functools import wraps
 from flask import request, jsonify
 from services.auth_service import AuthService
 from models.user import User
-
 def token_required(f):
     """Décorateur pour protéger les routes avec authentification JWT"""
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
-        
-        # Récupérer le token depuis les headers
         if 'Authorization' in request.headers:
             auth_header = request.headers['Authorization']
             try:
-                # Format: "Bearer <token>"
                 token = auth_header.split(' ')[1]
             except IndexError:
                 return jsonify({
                     'success': False,
                     'error': 'Token invalide. Format attendu: Bearer <token>'
                 }), 401
-        
         if not token:
             return jsonify({
                 'success': False,
                 'error': 'Token manquant. Ajoutez-le dans le header Authorization'
             }), 401
-        
-        # Vérifier le token
         payload = AuthService.verify_token(token)
         if not payload:
             return jsonify({
                 'success': False,
                 'error': 'Token invalide ou expiré'
             }), 401
-        
-        # Récupérer l'utilisateur
         user = AuthService.get_current_user(token)
         if not user:
             return jsonify({
                 'success': False,
                 'error': 'Utilisateur non trouvé'
             }), 401
-        
-        # Ajouter l'utilisateur aux arguments de la fonction
         return f(*args, current_user=user, **kwargs)
-    
     return decorated
-
 def role_required(*allowed_roles):
     """Décorateur pour vérifier le rôle de l'utilisateur"""
     def decorator(f):
@@ -59,18 +46,14 @@ def role_required(*allowed_roles):
                     'success': False,
                     'error': 'Authentification requise'
                 }), 401
-            
             if current_user.role not in allowed_roles:
                 return jsonify({
                     'success': False,
                     'error': f'Accès refusé. Rôles autorisés: {", ".join(allowed_roles)}'
                 }), 403
-            
             return f(*args, current_user=current_user, **kwargs)
-        
         return decorated
     return decorator
-
 def owner_or_admin_required(f):
     """Décorateur pour vérifier que l'utilisateur est propriétaire ou admin"""
     @wraps(f)
@@ -81,17 +64,13 @@ def owner_or_admin_required(f):
                 'success': False,
                 'error': 'Authentification requise'
             }), 401
-        
         if current_user.role not in ['owner', 'admin']:
             return jsonify({
                 'success': False,
                 'error': 'Accès refusé. Seuls les propriétaires et administrateurs peuvent accéder à cette ressource'
             }), 403
-        
         return f(*args, current_user=current_user, **kwargs)
-    
     return decorated
-
 def admin_required(f):
     """Décorateur pour vérifier que l'utilisateur est admin"""
     @wraps(f)
@@ -102,14 +81,10 @@ def admin_required(f):
                 'success': False,
                 'error': 'Authentification requise'
             }), 401
-        
         if current_user.role != 'admin':
             return jsonify({
                 'success': False,
                 'error': 'Accès refusé. Seuls les administrateurs peuvent accéder à cette ressource'
             }), 403
-        
         return f(*args, current_user=current_user, **kwargs)
-    
     return decorated
-

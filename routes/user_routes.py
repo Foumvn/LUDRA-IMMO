@@ -4,9 +4,7 @@ from utils.validators import validate_user_data
 from utils.helpers import error_response, success_response
 from utils.auth_decorators import token_required, admin_required
 from models.user import User
-
 user_bp = Blueprint('users', __name__)
-
 @user_bp.route('', methods=['POST'])
 @admin_required
 def create_user(current_user: User):
@@ -56,7 +54,7 @@ def create_user(current_user: User):
                   type: boolean
                   example: true
                 data:
-                  $ref: '#/definitions/User'
+                  $ref: '
       400:
         description: Erreur de validation
       403:
@@ -66,21 +64,15 @@ def create_user(current_user: User):
     """
     try:
         data = request.get_json()
-        
         if not data:
             return error_response("Données manquantes", 400)
-        
-        # Valider les données
         validation_error = validate_user_data(data)
         if validation_error:
             return error_response(validation_error, 400)
-        
         user = UserService.create_user(data)
         return success_response(user.to_dict(), 201)
-    
     except Exception as e:
         return error_response(f"Erreur lors de la création de l'utilisateur: {str(e)}", 500)
-
 @user_bp.route('/<uid>', methods=['GET'])
 def get_user(uid):
     """
@@ -109,7 +101,7 @@ def get_user(uid):
                   type: boolean
                   example: true
                 data:
-                  $ref: '#/definitions/User'
+                  $ref: '
       404:
         description: Utilisateur non trouvé
       500:
@@ -117,15 +109,11 @@ def get_user(uid):
     """
     try:
         user = UserService.get_user(uid)
-        
         if not user:
             return error_response("Utilisateur non trouvé", 404)
-        
         return success_response(user.to_dict())
-    
     except Exception as e:
         return error_response(f"Erreur lors de la récupération de l'utilisateur: {str(e)}", 500)
-
 @user_bp.route('', methods=['GET'])
 @admin_required
 def get_users(current_user: User):
@@ -138,19 +126,6 @@ def get_users(current_user: User):
     description: Récupère la liste de tous les utilisateurs avec pagination.
     security:
       - Bearer: []
-    parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          default: 50
-        description: Nombre maximum de résultats
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          default: 0
-        description: Nombre de résultats à ignorer
     responses:
       200:
         description: Liste des utilisateurs
@@ -165,22 +140,17 @@ def get_users(current_user: User):
                 data:
                   type: array
                   items:
-                    $ref: '#/definitions/User'
+                    $ref: '
       403:
         description: Droits insuffisants (admin requis)
       500:
         description: Erreur serveur
     """
     try:
-        limit = int(request.args.get('limit', 50))
-        offset = int(request.args.get('offset', 0))
-        
-        users = UserService.get_all_users(limit=limit, offset=offset)
+        users = UserService.get_all_users()
         return success_response([user.to_dict() for user in users])
-    
     except Exception as e:
         return error_response(f"Erreur lors de la récupération des utilisateurs: {str(e)}", 500)
-
 @user_bp.route('/<uid>', methods=['PUT'])
 @token_required
 def update_user(current_user: User, uid):
@@ -235,7 +205,7 @@ def update_user(current_user: User, uid):
                   type: boolean
                   example: true
                 data:
-                  $ref: '#/definitions/User'
+                  $ref: '
       403:
         description: Droits insuffisants
       404:
@@ -244,29 +214,19 @@ def update_user(current_user: User, uid):
         description: Erreur serveur
     """
     try:
-        # Vérifier les droits (utilisateur lui-même ou admin)
         if uid != current_user.uid and current_user.role != 'admin':
             return error_response("Vous n'avez pas les droits pour modifier cet utilisateur", 403)
-        
         data = request.get_json() or {}
-        
-        # Retirer les champs non modifiables
         data.pop('uid', None)
         data.pop('createdAt', None)
-        # Les utilisateurs non-admin ne peuvent pas changer leur rôle
         if current_user.role != 'admin' and 'role' in data:
             data.pop('role', None)
-        
         user = UserService.update_user(uid, data)
-        
         if not user:
             return error_response("Utilisateur non trouvé", 404)
-        
         return success_response(user.to_dict())
-    
     except Exception as e:
         return error_response(f"Erreur lors de la mise à jour de l'utilisateur: {str(e)}", 500)
-
 @user_bp.route('/<uid>', methods=['DELETE'])
 @token_required
 def delete_user(current_user: User, uid):
@@ -313,17 +273,11 @@ def delete_user(current_user: User, uid):
         description: Erreur serveur
     """
     try:
-        # Vérifier les droits (utilisateur lui-même ou admin)
         if uid != current_user.uid and current_user.role != 'admin':
             return error_response("Vous n'avez pas les droits pour supprimer cet utilisateur", 403)
-        
         success = UserService.delete_user(uid)
-        
         if not success:
             return error_response("Utilisateur non trouvé", 404)
-        
         return success_response({"message": "Utilisateur supprimé avec succès"})
-    
     except Exception as e:
         return error_response(f"Erreur lors de la suppression de l'utilisateur: {str(e)}", 500)
-

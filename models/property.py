@@ -1,9 +1,7 @@
 from datetime import datetime, timezone
 from typing import Optional, Dict, Any, List
-
 class Property:
     """Modèle propriété"""
-    
     def __init__(
         self,
         id: Optional[str],
@@ -51,7 +49,6 @@ class Property:
         self.contact_requests = contact_requests
         self.created_at = created_at or datetime.now(timezone.utc)
         self.updated_at = updated_at or datetime.now(timezone.utc)
-    
     def to_dict(self) -> Dict[str, Any]:
         """Convertit l'objet Property en dictionnaire"""
         return {
@@ -78,7 +75,6 @@ class Property:
             "createdAt": self.created_at.isoformat() if isinstance(self.created_at, datetime) else self.created_at,
             "updatedAt": self.updated_at.isoformat() if isinstance(self.updated_at, datetime) else self.updated_at
         }
-    
     @classmethod
     def from_dict(cls, data: Dict[str, Any], doc_id: Optional[str] = None) -> 'Property':
         """Crée un objet Property à partir d'un dictionnaire"""
@@ -106,4 +102,3 @@ class Property:
             created_at=datetime.fromisoformat(data["createdAt"]) if isinstance(data.get("createdAt"), str) else data.get("createdAt"),
             updated_at=datetime.fromisoformat(data["updatedAt"]) if isinstance(data.get("updatedAt"), str) else data.get("updatedAt")
         )
-

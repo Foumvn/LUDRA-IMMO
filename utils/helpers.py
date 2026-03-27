@@ -1,6 +1,5 @@
 from flask import jsonify
 from typing import Any, Dict
-
 def success_response(data: Any, status_code: int = 200) -> tuple:
     """Crée une réponse JSON de succès"""
     response = {
@@ -8,7 +7,6 @@ def success_response(data: Any, status_code: int = 200) -> tuple:
         "data": data
     }
     return jsonify(response), status_code
-
 def error_response(message: str, status_code: int = 400) -> tuple:
     """Crée une réponse JSON d'erreur"""
     response = {
@@ -16,4 +14,3 @@ def error_response(message: str, status_code: int = 400) -> tuple:
         "error": message
     }
     return jsonify(response), status_code
-

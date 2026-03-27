@@ -1,9 +1,7 @@
 from datetime import datetime, timezone
 from typing import Optional, Dict, Any
-
 class User:
     """Modèle utilisateur"""
-    
     def __init__(
         self,
         uid: str,
@@ -35,7 +33,6 @@ class User:
         self.preferences = preferences or {"notifications": True, "newsletter": False}
         self.created_at = created_at or datetime.now(timezone.utc)
         self.updated_at = updated_at or datetime.now(timezone.utc)
-    
     def to_dict(self) -> Dict[str, Any]:
         """Convertit l'objet User en dictionnaire"""
         return {
@@ -54,7 +51,6 @@ class User:
             "createdAt": self.created_at.isoformat() if isinstance(self.created_at, datetime) else self.created_at,
             "updatedAt": self.updated_at.isoformat() if isinstance(self.updated_at, datetime) else self.updated_at
         }
-    
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'User':
         """Crée un objet User à partir d'un dictionnaire"""
@@ -74,4 +70,3 @@ class User:
             created_at=datetime.fromisoformat(data["createdAt"]) if isinstance(data.get("createdAt"), str) else data.get("createdAt"),
             updated_at=datetime.fromisoformat(data["updatedAt"]) if isinstance(data.get("updatedAt"), str) else data.get("updatedAt")
         )
-

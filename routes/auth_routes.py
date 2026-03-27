@@ -3,9 +3,7 @@ from services.auth_service import AuthService
 from utils.helpers import error_response, success_response
 from utils.auth_decorators import token_required
 from models.user import User
-
 auth_bp = Blueprint('auth', __name__)
-
 @auth_bp.route('/register', methods=['POST'])
 def register():
     """
@@ -66,7 +64,7 @@ def register():
                   type: object
                   properties:
                     user:
-                      $ref: '#/definitions/User'
+                      $ref: '
                     token:
                       type: string
                       example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
@@ -85,30 +83,19 @@ def register():
     """
     try:
         data = request.get_json()
-        
         if not data:
             return error_response("Données manquantes", 400)
-        
-        # Validation des champs requis
         required_fields = ['email', 'password', 'name', 'phone', 'city']
         for field in required_fields:
             if field not in data or not data[field]:
                 return error_response(f"Le champ '{field}' est requis", 400)
-        
-        # Validation de l'email
         if '@' not in data['email']:
             return error_response("Email invalide", 400)
-        
-        # Validation du mot de passe (minimum 6 caractères)
         if len(data['password']) < 6:
             return error_response("Le mot de passe doit contenir au moins 6 caractères", 400)
-        
-        # Rôle par défaut
         role = data.get('role', 'user')
         if role not in ['user', 'owner', 'admin']:
             role = 'user'
-        
-        # Créer l'utilisateur
         result = AuthService.register(
             email=data['email'],
             password=data['password'],
@@ -117,14 +104,11 @@ def register():
             city=data['city'],
             role=role
         )
-        
         return success_response(result, 201)
-    
     except ValueError as e:
         return error_response(str(e), 400)
     except Exception as e:
         return error_response(f"Erreur lors de l'enregistrement: {str(e)}", 500)
-
 @auth_bp.route('/login', methods=['POST'])
 def login():
     """
@@ -167,7 +151,7 @@ def login():
                   type: object
                   properties:
                     user:
-                      $ref: '#/definitions/User'
+                      $ref: '
                     token:
                       type: string
                       example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
@@ -186,26 +170,19 @@ def login():
     """
     try:
         data = request.get_json()
-        
         if not data:
             return error_response("Données manquantes", 400)
-        
         if 'email' not in data or 'password' not in data:
             return error_response("Email et mot de passe requis", 400)
-        
-        # Authentifier l'utilisateur
         result = AuthService.login(
             email=data['email'],
             password=data['password']
         )
-        
         return success_response(result)
-    
     except ValueError as e:
         return error_response(str(e), 401)
     except Exception as e:
         return error_response(f"Erreur lors de la connexion: {str(e)}", 500)
-
 @auth_bp.route('/me', methods=['GET'])
 @token_required
 def get_current_user(current_user: User):
@@ -230,7 +207,7 @@ def get_current_user(current_user: User):
                   type: boolean
                   example: true
                 data:
-                  $ref: '#/definitions/User'
+                  $ref: '
       401:
         description: Token invalide ou manquant
       500:
@@ -240,7 +217,6 @@ def get_current_user(current_user: User):
         return success_response(current_user.to_dict())
     except Exception as e:
         return error_response(f"Erreur lors de la récupération de l'utilisateur: {str(e)}", 500)
-
 @auth_bp.route('/change-password', methods=['POST'])
 @token_required
 def change_password(current_user: User):
@@ -298,31 +274,22 @@ def change_password(current_user: User):
     """
     try:
         data = request.get_json()
-        
         if not data:
             return error_response("Données manquantes", 400)
-        
         if 'oldPassword' not in data or 'newPassword' not in data:
             return error_response("Ancien mot de passe et nouveau mot de passe requis", 400)
-        
-        # Validation du nouveau mot de passe
         if len(data['newPassword']) < 6:
             return error_response("Le nouveau mot de passe doit contenir au moins 6 caractères", 400)
-        
-        # Changer le mot de passe
         AuthService.change_password(
             user_id=current_user.uid,
             old_password=data['oldPassword'],
             new_password=data['newPassword']
         )
-        
         return success_response({"message": "Mot de passe modifié avec succès"})
-    
     except ValueError as e:
         return error_response(str(e), 400)
     except Exception as e:
         return error_response(f"Erreur lors du changement de mot de passe: {str(e)}", 500)
-
 @auth_bp.route('/verify-token', methods=['POST'])
 def verify_token():
     """
@@ -371,12 +338,9 @@ def verify_token():
     """
     try:
         data = request.get_json()
-        
         if not data or 'token' not in data:
             return error_response("Token requis", 400)
-        
         payload = AuthService.verify_token(data['token'])
-        
         if payload:
             return success_response({
                 "valid": True,
@@ -386,7 +350,5 @@ def verify_token():
             return success_response({
                 "valid": False
             })
-    
     except Exception as e:
         return error_response(f"Erreur lors de la vérification: {str(e)}", 500)
-

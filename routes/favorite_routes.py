@@ -3,9 +3,7 @@ from services.favorite_service import FavoriteService
 from utils.helpers import error_response, success_response
 from utils.auth_decorators import token_required
 from models.user import User
-
 favorite_bp = Blueprint('favorites', __name__)
-
 @favorite_bp.route('', methods=['POST'])
 @token_required
 def add_favorite(current_user: User):
@@ -43,7 +41,7 @@ def add_favorite(current_user: User):
                   type: boolean
                   example: true
                 data:
-                  $ref: '#/definitions/Favorite'
+                  $ref: '
       400:
         description: Erreur de validation
       500:
@@ -51,17 +49,12 @@ def add_favorite(current_user: User):
     """
     try:
         data = request.get_json()
-        
         if not data or 'propertyId' not in data:
             return error_response("propertyId est requis", 400)
-        
-        # Utiliser l'ID de l'utilisateur connecté
         favorite = FavoriteService.add_favorite(current_user.uid, data['propertyId'])
         return success_response(favorite.to_dict(), 201)
-    
     except Exception as e:
         return error_response(f"Erreur lors de l'ajout aux favoris: {str(e)}", 500)
-
 @favorite_bp.route('/me', methods=['GET'])
 @token_required
 def get_my_favorites(current_user: User):
@@ -88,17 +81,15 @@ def get_my_favorites(current_user: User):
                 data:
                   type: array
                   items:
-                    $ref: '#/definitions/Favorite'
+                    $ref: '
       500:
         description: Erreur serveur
     """
     try:
         favorites = FavoriteService.get_user_favorites(current_user.uid)
         return success_response([fav.to_dict() for fav in favorites])
-    
     except Exception as e:
         return error_response(f"Erreur lors de la récupération des favoris: {str(e)}", 500)
-
 @favorite_bp.route('/<property_id>', methods=['DELETE'])
 @token_required
 def remove_favorite(current_user: User, property_id):
@@ -142,15 +133,11 @@ def remove_favorite(current_user: User, property_id):
     """
     try:
         success = FavoriteService.remove_favorite(current_user.uid, property_id)
-        
         if not success:
             return error_response("Favori non trouvé", 404)
-        
         return success_response({"message": "Favori retiré avec succès"})
-    
     except Exception as e:
         return error_response(f"Erreur lors de la suppression du favori: {str(e)}", 500)
-
 @favorite_bp.route('/<property_id>/check', methods=['GET'])
 @token_required
 def check_favorite(current_user: User, property_id):
@@ -193,7 +180,5 @@ def check_favorite(current_user: User, property_id):
     try:
         is_favorite = FavoriteService.is_favorite(current_user.uid, property_id)
         return success_response({"isFavorite": is_favorite})
-    
     except Exception as e:
         return error_response(f"Erreur lors de la vérification: {str(e)}", 500)
-

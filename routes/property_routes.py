@@ -5,9 +5,7 @@ from utils.validators import validate_property_data
 from utils.helpers import error_response, success_response
 from utils.auth_decorators import token_required, owner_or_admin_required
 from models.user import User
-
 property_bp = Blueprint('properties', __name__)
-
 @property_bp.route('', methods=['POST'])
 @owner_or_admin_required
 def create_property(current_user: User):
@@ -112,7 +110,7 @@ def create_property(current_user: User):
                   type: boolean
                   example: true
                 data:
-                  $ref: '#/definitions/Property'
+                  $ref: '
       400:
         description: Erreur de validation
       403:
@@ -121,16 +119,13 @@ def create_property(current_user: User):
         description: Erreur serveur
     """
     try:
-        # Récupérer les données (JSON ou form-data)
         if request.is_json:
             data = request.get_json() or {}
             images = []
         else:
-            # Form-data: récupérer les champs du formulaire
             data = {}
             for key in request.form:
                 value = request.form[key]
-                # Essayer de parser les valeurs JSON si nécessaire
                 try:
                     if value.startswith('{') or value.startswith('['):
                         data[key] = json.loads(value)
@@ -145,28 +140,17 @@ def create_property(current_user: User):
                 except:
                     data[key] = value
             images = request.files.getlist('images')
-        
-        # Utiliser l'ownerId de l'utilisateur connecté si non spécifié
         if 'ownerId' not in data:
             data['ownerId'] = current_user.uid
-        
-        # Vérifier que l'utilisateur peut créer pour cet ownerId
         if data.get('ownerId') != current_user.uid and current_user.role != 'admin':
             return error_response("Vous ne pouvez créer des propriétés que pour votre propre compte", 403)
-        
-        # Valider les données
         validation_error = validate_property_data(data)
         if validation_error:
             return error_response(validation_error, 400)
-        
-        # Créer la propriété
         property_obj = PropertyService.create_property(data, images)
-        
         return success_response(property_obj.to_dict(), 201)
-    
     except Exception as e:
         return error_response(f"Erreur lors de la création de la propriété: {str(e)}", 500)
-
 @property_bp.route('/<property_id>', methods=['GET'])
 def get_property(property_id):
     """
@@ -196,7 +180,7 @@ def get_property(property_id):
                   type: boolean
                   example: true
                 data:
-                  $ref: '#/definitions/Property'
+                  $ref: '
       404:
         description: Propriété non trouvée
       500:
@@ -204,18 +188,12 @@ def get_property(property_id):
     """
     try:
         property_obj = PropertyService.get_property(property_id)
-        
         if not property_obj:
             return error_response("Propriété non trouvée", 404)
-        
-        # Incrémenter les visites
         PropertyService.increment_visits(property_id)
-        
         return success_response(property_obj.to_dict())
-    
     except Exception as e:
         return error_response(f"Erreur lors de la récupération de la propriété: {str(e)}", 500)
-
 @property_bp.route('', methods=['GET'])
 def get_properties():
     """
@@ -228,18 +206,6 @@ def get_properties():
       Récupère une liste de propriétés avec pagination et filtres optionnels.
       Les filtres peuvent être combinés.
     parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          default: 50
-        description: Nombre maximum de résultats
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          default: 0
-        description: Nombre de résultats à ignorer (pagination)
       - name: type
         in: query
         schema:
@@ -297,16 +263,11 @@ def get_properties():
                 data:
                   type: array
                   items:
-                    $ref: '#/definitions/Property'
+                    $ref: '
       500:
         description: Erreur serveur
     """
     try:
-        # Récupérer les paramètres de requête
-        limit = int(request.args.get('limit', 50))
-        offset = int(request.args.get('offset', 0))
-        
-        # Construire les filtres
         filters = {}
         if request.args.get('type'):
             filters['type'] = request.args.get('type')
@@ -322,14 +283,10 @@ def get_properties():
             filters['maxPrice'] = float(request.args.get('maxPrice'))
         if request.args.get('isFeatured'):
             filters['isFeatured'] = request.args.get('isFeatured').lower() == 'true'
-        
-        properties = PropertyService.get_all_properties(limit=limit, offset=offset, filters=filters)
-        
+        properties = PropertyService.get_all_properties(filters=filters)
         return success_response([prop.to_dict() for prop in properties])
-    
     except Exception as e:
         return error_response(f"Erreur lors de la récupération des propriétés: {str(e)}", 500)
-
 @property_bp.route('/owner/<owner_id>', methods=['GET'])
 @token_required
 def get_properties_by_owner(current_user: User, owner_id):
@@ -366,23 +323,19 @@ def get_properties_by_owner(current_user: User, owner_id):
                 data:
                   type: array
                   items:
-                    $ref: '#/definitions/Property'
+                    $ref: '
       403:
         description: Droits insuffisants
       500:
         description: Erreur serveur
     """
     try:
-        # Vérifier les droits (propriétaire lui-même ou admin)
         if owner_id != current_user.uid and current_user.role != 'admin':
             return error_response("Vous n'avez pas les droits pour voir ces propriétés", 403)
-        
         properties = PropertyService.get_properties_by_owner(owner_id)
         return success_response([prop.to_dict() for prop in properties])
-    
     except Exception as e:
         return error_response(f"Erreur lors de la récupération des propriétés: {str(e)}", 500)
-
 @property_bp.route('/<property_id>', methods=['PUT'])
 @token_required
 def update_property(current_user: User, property_id):
@@ -456,7 +409,7 @@ def update_property(current_user: User, property_id):
                   type: boolean
                   example: true
                 data:
-                  $ref: '#/definitions/Property'
+                  $ref: '
       403:
         description: Droits insuffisants
       404:
@@ -465,21 +418,15 @@ def update_property(current_user: User, property_id):
         description: Erreur serveur
     """
     try:
-        # Vérifier que la propriété existe et que l'utilisateur a les droits
         property_obj = PropertyService.get_property(property_id)
         if not property_obj:
             return error_response("Propriété non trouvée", 404)
-        
-        # Vérifier les droits (owner de la propriété ou admin)
         if property_obj.owner_id != current_user.uid and current_user.role != 'admin':
             return error_response("Vous n'avez pas les droits pour modifier cette propriété", 403)
-        
-        # Récupérer les données (JSON ou form-data)
         if request.is_json:
             data = request.get_json() or {}
             images = []
         else:
-            # Form-data
             data = {}
             for key in request.form:
                 value = request.form[key]
@@ -497,19 +444,13 @@ def update_property(current_user: User, property_id):
                 except:
                     data[key] = value
             images = request.files.getlist('images')
-        
-        # Retirer les champs non modifiables
         data.pop('id', None)
         data.pop('ownerId', None)
         data.pop('createdAt', None)
-        
         property_obj = PropertyService.update_property(property_id, data, images)
-        
         return success_response(property_obj.to_dict())
-    
     except Exception as e:
         return error_response(f"Erreur lors de la mise à jour de la propriété: {str(e)}", 500)
-
 @property_bp.route('/<property_id>', methods=['DELETE'])
 @token_required
 def delete_property(current_user: User, property_id):
@@ -556,22 +497,15 @@ def delete_property(current_user: User, property_id):
         description: Erreur serveur
     """
     try:
-        # Vérifier que la propriété existe et que l'utilisateur a les droits
         property_obj = PropertyService.get_property(property_id)
         if not property_obj:
             return error_response("Propriété non trouvée", 404)
-        
-        # Vérifier les droits (owner de la propriété ou admin)
         if property_obj.owner_id != current_user.uid and current_user.role != 'admin':
             return error_response("Vous n'avez pas les droits pour supprimer cette propriété", 403)
-        
         success = PropertyService.delete_property(property_id)
-        
         return success_response({"message": "Propriété supprimée avec succès"})
-    
     except Exception as e:
         return error_response(f"Erreur lors de la suppression de la propriété: {str(e)}", 500)
-
 @property_bp.route('/<property_id>/contact', methods=['POST'])
 @token_required
 def request_contact(current_user: User, property_id):
@@ -614,7 +548,5 @@ def request_contact(current_user: User, property_id):
     try:
         PropertyService.increment_contact_requests(property_id)
         return success_response({"message": "Demande de contact enregistrée"})
-    
     except Exception as e:
         return error_response(f"Erreur lors de l'enregistrement de la demande: {str(e)}", 500)
-

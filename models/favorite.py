@@ -1,9 +1,7 @@
 from datetime import datetime, timezone
 from typing import Optional, Dict, Any
-
 class Favorite:
     """Modèle favori"""
-    
     def __init__(
         self,
         id: Optional[str],
@@ -15,7 +13,6 @@ class Favorite:
         self.user_id = user_id
         self.property_id = property_id
         self.created_at = created_at or datetime.now(timezone.utc)
-    
     def to_dict(self) -> Dict[str, Any]:
         """Convertit l'objet Favorite en dictionnaire"""
         return {
@@ -24,7 +21,6 @@ class Favorite:
             "propertyId": self.property_id,
             "createdAt": self.created_at.isoformat() if isinstance(self.created_at, datetime) else self.created_at
         }
-    
     @classmethod
     def from_dict(cls, data: Dict[str, Any], doc_id: Optional[str] = None) -> 'Favorite':
         """Crée un objet Favorite à partir d'un dictionnaire"""
@@ -34,4 +30,3 @@ class Favorite:
             property_id=data.get("propertyId", ""),
             created_at=datetime.fromisoformat(data["createdAt"]) if isinstance(data.get("createdAt"), str) else data.get("createdAt")
         )
-

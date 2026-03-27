@@ -3,9 +3,7 @@ from services.dashboard_service import DashboardService
 from utils.helpers import error_response, success_response
 from utils.auth_decorators import token_required
 from models.user import User
-
 dashboard_bp = Blueprint('dashboard', __name__)
-
 @dashboard_bp.route('/owner/<owner_id>', methods=['GET'])
 @token_required
 def get_owner_dashboard(current_user: User, owner_id):
@@ -54,20 +52,16 @@ def get_owner_dashboard(current_user: User, owner_id):
                     recentProperties:
                       type: array
                       items:
-                        $ref: '#/definitions/Property'
+                        $ref: '
       403:
         description: Droits insuffisants
       500:
         description: Erreur serveur
     """
     try:
-        # Vérifier les droits (propriétaire lui-même ou admin)
         if owner_id != current_user.uid and current_user.role != 'admin':
             return error_response("Vous n'avez pas les droits pour voir ce dashboard", 403)
-        
         dashboard_data = DashboardService.get_owner_dashboard(owner_id)
         return success_response(dashboard_data)
-    
     except Exception as e:
         return error_response(f"Erreur lors de la récupération du dashboard: {str(e)}", 500)
-
