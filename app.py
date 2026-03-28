@@ -39,6 +39,17 @@ def create_app():
     app.register_blueprint(user_bp, url_prefix='/api/users')
     app.register_blueprint(favorite_bp, url_prefix='/api/favorites')
     app.register_blueprint(dashboard_bp, url_prefix='/api/dashboard')
+
+    @app.route('/')
+    def home():
+        """Page d'accueil de l'API"""
+        return {
+            "status": "online",
+            "message": "Bienvenue sur l'API LUDRA-IMMO",
+            "docs": "/api/docs",
+            "health": "/api/health"
+        }, 200
+
     @app.route('/api/health')
     def health():
         """
