@@ -4,10 +4,10 @@ info:
   description: API REST pour la gestion immobilière
   version: 1.0.0
 
-host: localhost:5000
+host: ludra-immo.onrender.com
 basePath: /api
 schemes:
-  - http
+  - https
 
 securityDefinitions:
   Bearer:
