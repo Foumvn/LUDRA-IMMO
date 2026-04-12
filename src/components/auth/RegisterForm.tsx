@@ -14,6 +14,7 @@ import { registerSchema, type RegisterForm as RegisterFormType } from "@/utilis/
 import { Button } from "@/components/common/ui/Button";
 import { Card } from "@/components/common/ui/Card";
 import URL from "@/utilis/url/url_front";
+import { authService } from "@/services/authService";
 
 export default function RegisterForm() {
   const { t } = useTranslation();
@@ -33,12 +34,31 @@ export default function RegisterForm() {
     setError('');
 
     try {
-      // Pour l'instant, rediriger vers login car NextAuth ne gère pas l'inscription côté client
-      // Vous devrez créer une API route pour gérer l'inscription
-      router.push(URL.auth.login + '?message=Inscription réussie. Connectez-vous.');
-    } catch (error) {
-      console.error("Erreur d'inscription:", error);
-      setError('Une erreur est survenue lors de l\'inscription');
+      const response = await authService.register({
+        email: data.email,
+        password: data.password,
+        name: data.name,
+        phone: data.phone,
+        city: data.city,
+      });
+
+      // Sauvegarder le token et les données utilisateur
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
+
+      // Rediriger selon le rôle
+      const role = response.user.role;
+      if (role === 'admin') {
+        router.push(URL.admin.dashboard);
+      } else if (role === 'landlord') {
+        router.push(URL.landlord.dashboard);
+      } else {
+        router.push('/');
+      }
+    } catch (err: any) {
+      console.error("Erreur d'inscription:", err);
+      const msg = err?.response?.data?.error || 'Une erreur est survenue lors de l\'inscription';
+      setError(msg);
     } finally {
       setIsLoading(false);
     }
@@ -130,6 +150,27 @@ export default function RegisterForm() {
             {errors.phone && (
               <span className="text-secondary text-xs mt-1 block">
                 {t(errors.phone.message as string)}
+              </span>
+            )}
+          </div>
+
+          {/* Ville */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Ville
+            </label>
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <input
+                className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                placeholder="Douala, Yaoundé..."
+                {...register("city")}
+                disabled={isLoading}
+              />
+            </div>
+            {errors.city && (
+              <span className="text-secondary text-xs mt-1 block">
+                {t(errors.city.message as string)}
               </span>
             )}
           </div>

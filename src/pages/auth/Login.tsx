@@ -2,18 +2,18 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession, signIn } from 'next-auth/react';
+import { useAuth } from '@/hooks/useAuth';
 import AnimatedBackground from '@/components/common/_others/AnimatedBackground';
 import LoginForm from '@/components/auth/LoginForm';
 import URL from '@/utilis/url/url_front';
 
 export default function LoginPage() {
-  const { data: session, status } = useSession();
+  const { isAuthenticated, user, loading, login } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === 'authenticated' && session?.user) {
-      const userRole = session.user.role;
+    if (isAuthenticated && user) {
+      const userRole = user.role;
       
       switch (userRole) {
         case 'admin':
@@ -23,31 +23,29 @@ export default function LoginPage() {
           router.push(URL.landlord.dashboard);
           break;
         case 'user':
+          router.push('/');
+          break;
         default:
-          router.push(URL.app.dashboard);
+          router.push('/');
           break;
       }
     }
-  }, [session, status, router]);
+  }, [isAuthenticated, user, router]);
 
   const handleSuccess = async (credentials: { emailOrPhone: string; password: string }) => {
     try {
-      const result = await signIn('credentials', {
+      // Utiliser notre système d'authentification custom
+      await login({
         email: credentials.emailOrPhone,
-        password: credentials.password,
-        redirect: false,
+        password: credentials.password
       });
-
-      if (result?.error) {
-        throw new Error(result.error);
-      }
 
     } catch (error) {
       throw error;
     }
   };
 
-  if (status === 'loading') {
+  if (loading) {
     return (
       <main className="relative min-h-screen flex items-center justify-center p-4">
         <AnimatedBackground />

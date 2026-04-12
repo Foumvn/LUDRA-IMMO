@@ -1,23 +1,23 @@
 // hooks/useRole.ts
-import { useSession } from 'next-auth/react';
+import { useAuth } from './useAuth';
 
 export function useRole() {
-  const { data: session, status } = useSession();
+  const { user, loading, isAuthenticated } = useAuth();
 
   return {
-    user: session?.user,
-    role: session?.user?.role,
-    isAuthenticated: status === 'authenticated',
-    isLoading: status === 'loading',
-    isAdmin: session?.user?.role === 'admin',
-    isLandlord: session?.user?.role === 'landlord',
-    isUser: session?.user?.role === 'user',
+    user,
+    role: user?.role,
+    isAuthenticated,
+    isLoading: loading,
+    isAdmin: user?.role === 'admin',
+    isLandlord: user?.role === 'landlord',
+    isUser: user?.role === 'user',
     hasRole: (roles: string | string[]) => {
-      if (!session?.user?.role) return false;
+      if (!user?.role) return false;
       if (Array.isArray(roles)) {
-        return roles.includes(session.user.role);
+        return roles.includes(user.role);
       }
-      return session.user.role === roles;
+      return user.role === roles;
     }
   };
 }

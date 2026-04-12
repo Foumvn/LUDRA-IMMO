@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr">
-      <body className={inter.className}>
+    <html lang="fr" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
         <I18nProvider>
           <AuthProvider>
             <RootLayouter>{children}</RootLayouter>

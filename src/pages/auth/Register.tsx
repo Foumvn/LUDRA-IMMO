@@ -3,22 +3,22 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { useAuth } from '@/hooks/useAuth';
 import AnimatedBackground from '@/components/common/_others/AnimatedBackground';
 import RegisterForm from '@/components/auth/RegisterForm';
 import URL from '@/utilis/url/url_front';
 
 export default function RegisterPage() {
-  const { data: session, status } = useSession();
+  const { isAuthenticated, user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === 'authenticated') {
-      router.push(URL.app.dashboard);
+    if (isAuthenticated) {
+      router.push('/');
     }
-  }, [session, status, router]);
+  }, [isAuthenticated, router]);
 
-  if (status === 'loading') {
+  if (loading) {
     return (
       <main className="relative min-h-screen flex items-center justify-center p-4">
         <AnimatedBackground />

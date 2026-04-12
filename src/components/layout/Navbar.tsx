@@ -5,23 +5,19 @@ import { useTranslation } from 'react-i18next';
 import { Menu, X, Home, Heart, Info, Phone, LogIn, UserPlus, LogOut, User, Settings } from 'lucide-react';
 import { Button } from '@/components/common/ui/Button';
 import Link from "next/link";
-import { useSession, signOut } from 'next-auth/react';
+import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import URL from '@/utilis/url/url_front';
 
 const Navbar = memo(() => {
   const { t } = useTranslation();
-  const { data: session, status } = useSession();
+  const { user, isAuthenticated, loading, logout } = useAuth();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
-
-  const user = session?.user;
-  const isAuthenticated = status === 'authenticated';
-  const isLoading = status === 'loading';
 
   const navigation = [
     { name: 'navigation.properties', href: URL.public.properties, icon: Home },
@@ -62,8 +58,9 @@ const Navbar = memo(() => {
   };
 
   const handleLogout = async () => {
-    await signOut({ callbackUrl: URL.public.home });
+    await logout();
     setIsProfileMenuOpen(false);
+    router.push('/');
   };
 
   const getDashboardUrl = () => {
@@ -86,7 +83,7 @@ const Navbar = memo(() => {
     return user.name.split(' ')[0];
   };
 
-  if (isLoading) {
+  if (loading) {
     return (
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

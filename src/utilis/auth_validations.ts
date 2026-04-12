@@ -16,6 +16,8 @@ export const registerSchema = z.object({
   phone: z.string()
     .min(1, 'auth.validation.phone_required')
     .regex(/^(\+237|237)?[6|2|3]\d{8}$/, 'auth.validation.phone_invalid'),
+  city: z.string()
+    .min(1, 'auth.validation.city_required'),
   password: z.string()
     .min(1, 'auth.validation.password_required')
     .min(8, 'auth.validation.password_min')
