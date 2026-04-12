@@ -352,3 +352,23 @@ def verify_token():
             })
     except Exception as e:
         return error_response(f"Erreur lors de la vérification: {str(e)}", 500)
+
+@auth_bp.route('/logout', methods=['POST', 'OPTIONS'])
+def logout():
+    """
+    Déconnecter l'utilisateur
+    ---
+    tags:
+      - Auth
+    summary: Déconnexion utilisateur
+    description: Permet de se déconnecter. Le token est invalidé côté client.
+    responses:
+      200:
+        description: Déconnexion réussie
+      500:
+        description: Erreur serveur
+    """
+    try:
+        return success_response({"message": "Déconnexion réussie"})
+    except Exception as e:
+        return error_response(f"Erreur lors de la déconnexion: {str(e)}", 500)
